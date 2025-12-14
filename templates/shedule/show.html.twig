@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shedule{% endblock %}
+
+{% block body %}
+    <h1>Shedule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ shedule.id }}</td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td>{{ shedule.room }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{ shedule.time ? shedule.time|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_shedule_index') }}">back to list</a>
+
+    <a href="{{ path('app_shedule_edit', {'id': shedule.id}) }}">edit</a>
+
+    {{ include('shedule/_delete_form.html.twig') }}
+{% endblock %}

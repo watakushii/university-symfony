@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>University Management System</h1>
+    
+    {% if app.user %}
+        <div class="alert alert-success">
+            <p>Welcome, <strong>{{ app.user.email }}</strong>!</p>
+            <p>Your roles: {{ app.user.roles|join(', ') }}</p>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Quick Links</h3>
+                <ul>
+                    {% if 'ROLE_STUDENT' in app.user.roles %}
+                        <li><a href="{{ path('student_dashboard') }}">Student Dashboard</a></li>
+                        <li><a href="{{ path('student_courses') }}">My Courses</a></li>
+                        <li><a href="{{ path('student_exams') }}">My Exams</a></li>
+                        <li><a href="{{ path('student_payments') }}">My Payments</a></li>
+                    {% endif %}
+                    
+                    {% if 'ROLE_TEACHER' in app.user.roles %}
+                        <li><a href="{{ path('teacher_dashboard') }}">Teacher Dashboard</a></li>
+                    {% endif %}
+                    
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <li><a href="{{ path('admin_dashboard') }}">Admin Dashboard</a></li>
+                        <li><a href="{{ path('admin_student_create') }}">Create Student</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p>Please <a href="{{ path('app_login') }}">login</a> to access the system.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

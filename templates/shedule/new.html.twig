@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Shedule{% endblock %}
+
+{% block body %}
+    <h1>Create new Shedule</h1>
+
+    {{ include('shedule/_form.html.twig') }}
+
+    <a href="{{ path('app_shedule_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enrollment index{% endblock %}
+
+{% block body %}
+    <h1>Enrollment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Grade</th>
+                <th>EnrolledAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.id }}</td>
+                <td>{{ enrollment.grade }}</td>
+                <td>{{ enrollment.enrolledAt ? enrollment.enrolledAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_enrollment_show', {'id': enrollment.id}) }}">show</a>
+                    <a href="{{ path('app_enrollment_edit', {'id': enrollment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_enrollment_new') }}">Create new</a>
+{% endblock %}
